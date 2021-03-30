@@ -1,0 +1,26 @@
+.navbar-text{
+    opacity: 1;
+    color: black;
+}
+
+#sticky-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#createbtn{
+    margin: 0.6rem;
+}
+
+#logo{
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+}
+
+@media screen and (max-width :425px){
+    #name{font-size: 0;}
+}
+
+/* start show recent firestore order time desc limit 10
+ second container show latertetsif any else no text*/

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotePen</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/09f2d0ec8f.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="https://img.icons8.com/cotton/64/000000/note--v1.png">
+</head>
+<body>
+    <header>
+        <nav class="navbar bg-light navbar-light">
+            <div  class="navbar-brand" id="logo">
+                <h1><img class="brand-img" src="https://img.icons8.com/cotton/40/000000/note--v2.png"/>  NotePen</h1>
+            </div>
+            <div class="justify-content-end">
+                <img src="https://img.icons8.com/dusk/52/000000/cat-profile.png"/>
+                <h4 class="navbar-text" id="name">Rohit</h4>
+                <h4 class="btn btn-info" >Sign-In</h4>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <center><button type="button" id="createbtn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                <img src="https://img.icons8.com/android//000000/plus.png"/> Add Note
+              </button></center>
+        </div>
+    </main>
+    <footer id="sticky-footer" class="py-1 bg-dark text-white-50">
+        <div class="container text-center">
+          <p>Copyright &copy; || Developer @ <a href="mailto:kavitakerohit2001@gmail.com">Rohit Kavitake</a></p>
+        </div>
+      </footer>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/8.3.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/8.3.1/firebase-analytics.js"></script>
+    <script src="/__/firebase/8.3.1/firebase-auth.js"></script>
+    <script src="/__/firebase/8.3.1/firebase-firestore.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
