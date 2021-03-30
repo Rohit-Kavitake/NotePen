@@ -72,7 +72,7 @@ const addTask = () =>{
     let titlevalue = document.querySelector('#title').value;
     let taskvalue = document.querySelector('#task').value;
     let feedback = document.querySelector("#feedback");
-    if(title == "" || task == ""){
+    if(titlevalue == "" || taskvalue == ""){
         alert("Please Fill All Fields")
     }
     else{
@@ -93,9 +93,37 @@ const addTask = () =>{
     }
 }
 
+const bgColorChange = () => {
+    let red = Math.floor(Math.random() * 256) + 64; 
+    let green = Math.floor(Math.random() * 256) + 64; 
+    let blue = Math.floor(Math.random() * 256) + 64; 
+    let backColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+    return backColor;
+}
+
+const RetrieveData = () =>{
+    firebase.firestore().collection(firebase.auth().currentUser.email).orderBy("time", "desc").get()
+    .then(snap => {
+        snap.forEach(doc =>{
+            console.log(doc.id);
+            document.querySelector('#ShowData').innerHTML = template('title','lorem ispum baskjhfsh', '12pm')
+            document.querySelector('#ShowData').innerHTML += template('title','lorem ispum baskjhfsh', '12pm')
+            document.querySelector('#ShowData').innerHTML += template('title','lorem ispum baskjhfsh', '12pm')
+            /*TODO 1 apr : use container and row to display 3 items in a line
+            use ham code wala logic to apeend div inside container and rows
+            add event listener to open modal on click of note for update and delete
+            add contact develeoper for queries btn at end of logged in page
+            dont cry :( */
+        })
+    })
+}
+
+const template = (title,note,time) =>{
+    return '<div class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small></div>'
+}
 
 initFirebaseAuth();
-
+// RetrieveData()
 
 document.querySelector("#signInbtn").addEventListener('click',signIn);
 
