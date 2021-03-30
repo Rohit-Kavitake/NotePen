@@ -29,17 +29,31 @@
                 <h1><img class="brand-img" src="https://img.icons8.com/cotton/40/000000/note--v2.png"/>  NotePen</h1>
             </div>
             <div class="justify-content-end">
-                <img src="https://img.icons8.com/dusk/52/000000/cat-profile.png"/>
-                <h4 class="navbar-text" id="name">Rohit</h4>
-                <h4 class="btn btn-info" >Sign-In</h4>
+                <img hidden class="profile" src=""/>
+                <h4 class="navbar-text" id="name"></h4>
+                <button class="btn btn-info" id="signInbtn" >Sign-In</button>
+                <button hidden class="btn btn-info" id="signout">Sign-Out</button>
             </div>
         </nav>
     </header>
     <main>
         <div class="container">
-            <center><button type="button" id="createbtn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <center><button hidden type="button" id="createbtn" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                 <img src="https://img.icons8.com/android//000000/plus.png"/> Add Note
               </button></center>
+        </div>
+        <div class="container">
+            <div class="center">
+                <center>
+                <div class="info">
+                    <h1>An Web Application to Save Securely all Personal Notes, list and To-do's</h1>
+                    <button class="btn btn-primary" onclick="started()" >Get Started</button>
+                </div>
+                <div class="image">
+                    <img class="img-fluid" src="assets/Logo.png">
+                </div>
+                </center>
+            </div>
         </div>
     </main>
     <footer id="sticky-footer" class="py-1 bg-dark text-white-50">
@@ -48,17 +62,31 @@
         </div>
       </footer>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/8.3.1/firebase-app.js"></script>
+   <!-- Firebase sdk -->
+   <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="/__/firebase/8.3.1/firebase-analytics.js"></script>
-    <script src="/__/firebase/8.3.1/firebase-auth.js"></script>
-    <script src="/__/firebase/8.3.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyAtS4ukctATq6eyZ_0ar64gEyGGDN5zvHk",
+        authDomain: "nootepenn.firebaseapp.com",
+        projectId: "nootepenn",
+        storageBucket: "nootepenn.appspot.com",
+        messagingSenderId: "121540545122",
+        appId: "1:121540545122:web:7f7ec261932044e86adf3b",
+        measurementId: "G-Z87171F5SB"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

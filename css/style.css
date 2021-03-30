@@ -4,13 +4,13 @@
 }
 
 #sticky-footer {
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     width: 100%;
 }
 
 #createbtn{
-    margin: 0.6rem;
+    margin: 0.2rem;
 }
 
 #logo{
@@ -18,9 +18,41 @@
     font-size: 2rem;
 }
 
-@media screen and (max-width :425px){
+@media screen and (max-width :426px){
     #name{font-size: 0;}
 }
 
+#name{
+    color: black;
+    opacity: 0.9;
+}
+
+.profile{
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+}
+
+@media screen and (max-width :321px){
+    button{font-size: 0;
+        background-color: none;}
+}
+
+.center{
+    justify-content: center;
+}
+
+.info{
+    margin: 0.6rem;
+}
+
+.image{
+    margin-bottom: 0.6rem;
+    height: 70%;
+}
+
+.info button{
+    font-size: 1.2rem;
+}
 /* start show recent firestore order time desc limit 10
  second container show latertetsif any else no text*/
