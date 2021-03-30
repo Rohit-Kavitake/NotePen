@@ -9,6 +9,8 @@
     width: 100%;
 }
 
+
+
 #createbtn{
     margin: 0.2rem;
 }
@@ -53,6 +55,17 @@
 
 .info button{
     font-size: 1.2rem;
+}
+
+textarea{
+    width: 90%;
+    margin: 0.6rem;
+    margin-top: 0.2rem;
+    white-space: pre-wrap;
+}
+
+input{
+    margin: 0.4rem;
 }
 /* start show recent firestore order time desc limit 10
  second container show latertetsif any else no text*/
