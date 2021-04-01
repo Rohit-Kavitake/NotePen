@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 .navbar-text{
     opacity: 1;
     color: black;
@@ -61,11 +65,19 @@ textarea{
     width: 90%;
     margin: 0.6rem;
     margin-top: 0.2rem;
-    white-space: pre-wrap;
+    /* white-space: pre-wrap; */
 }
 
 input{
     margin: 0.4rem;
 }
-/* start show recent firestore order time desc limit 10
- second container show latertetsif any else no text*/
+#ShowData{
+    margin: 1.5rem;
+}
+
+#DataNote{
+    /* padding: 0.8rem; */
+    overflow: auto;
+    padding: 3rem;
+    height: 15rem;
+}

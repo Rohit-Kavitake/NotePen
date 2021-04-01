@@ -45,7 +45,9 @@ function authStateObserver(user) {
         document.querySelector("#signout").removeAttribute('hidden');
         document.querySelector("#signout").addEventListener('click',signOut);
         document.querySelector('#createbtn').removeAttribute('hidden');
+        document.querySelector('#ShowData').removeAttribute('hidden');
         document.querySelector("#sticky-footer").setAttribute('hidden','true');
+        RetrieveData()
 
     } 
     else { // User is signed out!
@@ -59,6 +61,7 @@ function authStateObserver(user) {
         document.querySelector("#sticky-footer").removeAttribute('hidden');
         // document.querySelector("#sticky-footer").style.position = "absolute";
         document.querySelector('#createbtn').setAttribute('hidden','true');
+        document.querySelector('#ShowData').setAttribute('hidden','true');
     }
   }
 
@@ -83,13 +86,13 @@ const addTask = () =>{
         }).then(fun =>{
             feedback.textContent = "Blog Successfully Saved";
             document.querySelector('#reset').click();
-        setTimeout(function(){ feedback.textContent = "";document.querySelector('.close').click()},2000)
+        setTimeout(function(){ feedback.textContent = "";document.querySelector('.close').click()},1000)
         }).catch( err => {
             console.log("Firestore Database adding data error")
             feedback.textContent = "Blog Saving Error";
             
         });
-        // RetrieveData()
+        RetrieveData()
     }
 }
 
@@ -102,15 +105,15 @@ const bgColorChange = () => {
 }
 
 const RetrieveData = () =>{
+    document.querySelector('#ShowData').innerHTML = ""
     firebase.firestore().collection(firebase.auth().currentUser.email).orderBy("time", "desc").get()
     .then(snap => {
         snap.forEach(doc =>{
             console.log(doc.id);
-            document.querySelector('#ShowData').innerHTML = template('title','lorem ispum baskjhfsh', '12pm')
-            document.querySelector('#ShowData').innerHTML += template('title','lorem ispum baskjhfsh', '12pm')
-            document.querySelector('#ShowData').innerHTML += template('title','lorem ispum baskjhfsh', '12pm')
-            /*TODO 1 apr : use container and row to display 3 items in a line
-            use ham code wala logic to apeend div inside container and rows
+            document.querySelector('#ShowData').innerHTML += template(doc.get('title'),getStringWithNewLine(doc.get('note')), doc.get('time'),doc.id)
+
+            // document.querySelector('#DataNote').style.background = bgColorChange() 
+            /*TODO 1 apr : 
             add event listener to open modal on click of note for update and delete
             add contact develeoper for queries btn at end of logged in page
             dont cry :( */
@@ -118,9 +121,19 @@ const RetrieveData = () =>{
     })
 }
 
-const template = (title,note,time) =>{
-    return '<div class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small></div>'
+const template = (title,note,time,Id) =>{
+    return '<div id="DataNote" style="color : bgcolor()" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
 }
+
+const getStringWithNewLine = (str="") => {
+    if(str){
+        return str.split('\n').join("<br/>")
+        // return str.replace('\n', "<BR>");
+        console.log(str)
+    }
+    return str
+}
+
 
 initFirebaseAuth();
 // RetrieveData()

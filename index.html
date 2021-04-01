@@ -19,8 +19,8 @@
     <script src="https://kit.fontawesome.com/09f2d0ec8f.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="https://img.icons8.com/cotton/64/000000/note--v1.png">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -95,9 +95,42 @@
                 </center>
             </div>
         </div>
-        <div id="ShowData" class="container">
-            
+        <div  class="container">
+            <div class="row" id="ShowData">
+
+            </div>
         </div>
+        <div class="modal" id="updateData">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+              
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title"><i class="fas fa-pencil-alt"></i>   Add Task</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <form>
+                      <label for="title" >Title :-</label>
+                      <input type="text" id="title" placeholder="Title" class="form-control" required>
+                      <label for="task">Enter the Content :-</label>
+                      <textarea rows="10" id="task" placeholder="Enter Notes Here" wrap="hard" required></textarea>
+                      <button type="reset" id="reset" class="btn btn-danger">Reset</button>
+                      <label id="feedback"></label>   
+                  </form>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="addTask()">Submit</button>
+                </div>
+                
+              </div>
+
+            </div>
+          </div>
     </main>
     <footer id="sticky-footer" class="py-1 bg-dark text-white-50">
         <div class="container text-center">
