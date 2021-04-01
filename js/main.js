@@ -84,7 +84,7 @@ const addTask = () =>{
             note : taskvalue,
             time : firebase.firestore.FieldValue.serverTimestamp()
         }).then(fun =>{
-            feedback.textContent = "Blog Successfully Saved";
+            feedback.textContent = " Successfully Saved";
             document.querySelector('#reset').click();
         setTimeout(function(){ feedback.textContent = "";document.querySelector('.close').click()},1000)
         }).catch( err => {
