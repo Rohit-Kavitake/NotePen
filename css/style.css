@@ -81,3 +81,6 @@ input{
     padding: 3rem;
     height: 15rem;
 }
+input[type=text]{
+    font-weight: 700;
+}

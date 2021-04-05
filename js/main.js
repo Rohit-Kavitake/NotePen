@@ -46,7 +46,7 @@ function authStateObserver(user) {
         document.querySelector("#signout").addEventListener('click',signOut);
         document.querySelector('#createbtn').removeAttribute('hidden');
         document.querySelector('#ShowData').removeAttribute('hidden');
-        document.querySelector("#sticky-footer").setAttribute('hidden','true');
+        // document.querySelector("#sticky-footer").setAttribute('hidden','true');
         RetrieveData()
 
     } 
@@ -121,8 +121,19 @@ const RetrieveData = () =>{
     })
 }
 
+const editNote = async  (id) =>{
+
+    const doc =  await firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).get()
+    $('#updatetitle').val(doc.get('title'))   
+    $('#updatetask').val(doc.get('note'))   
+    $("#updateData").modal('show')
+    console.log("Head")
+    // console.log(updateData);
+    
+}
+
 const template = (title,note,time,Id) =>{
-    return '<div id="DataNote" style="color : bgcolor()" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
+    return '<div id="DataNote" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
 }
 
 const getStringWithNewLine = (str="") => {
