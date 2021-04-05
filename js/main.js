@@ -47,7 +47,7 @@ function authStateObserver(user) {
         document.querySelector('#createbtn').removeAttribute('hidden');
         document.querySelector('#ShowData').removeAttribute('hidden');
         // document.querySelector("#sticky-footer").setAttribute('hidden','true');
-        RetrieveData()
+        RetrievePen()
 
     } 
     else { // User is signed out!
@@ -71,7 +71,7 @@ function initFirebaseAuth() {
   
 }
 
-const addTask = () =>{
+const addPen = () =>{
     let titlevalue = document.querySelector('#title').value;
     let taskvalue = document.querySelector('#task').value;
     let feedback = document.querySelector("#feedback");
@@ -92,26 +92,49 @@ const addTask = () =>{
             feedback.textContent = "Blog Saving Error";
             
         });
-        RetrieveData()
+        RetrievePen()
     }
 }
 
-const bgColorChange = () => {
-    let red = Math.floor(Math.random() * 256) + 64; 
-    let green = Math.floor(Math.random() * 256) + 64; 
-    let blue = Math.floor(Math.random() * 256) + 64; 
-    let backColor = "rgb(" + red + ", " + green + ", " + blue + ")";
-    return backColor;
-}
+// const bgColorChange = () => {
+//     let red = Math.floor(Math.random() * 256) + 64; 
+//     let green = Math.floor(Math.random() * 256) + 64; 
+//     let blue = Math.floor(Math.random() * 256) + 64; 
+//     let backColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+//     return backColor;
+// }
 
-const RetrieveData = () =>{
+const RetrievePen = () =>{
     document.querySelector('#ShowData').innerHTML = ""
     firebase.firestore().collection(firebase.auth().currentUser.email).orderBy("time", "desc").get()
     .then(snap => {
         snap.forEach(doc =>{
+            let time =doc.get('time')
+            let title =doc.get('title')
+            let note =doc.get('note')
+            let ide =doc.id
             console.log(doc.id);
-            document.querySelector('#ShowData').innerHTML += template(doc.get('title'),getStringWithNewLine(doc.get('note')), doc.get('time'),doc.id)
-
+            if(time != null) time = time.toDate();
+            if(time == null) time = "Just now"
+            // return '<div id="DataNote" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
+            let outerDiv = document.createElement("div");
+            outerDiv.className = "col-md-4 col-sm-4"
+            // outerDiv.id = ide;
+            let titlehead = document.createElement('h3');
+            titlehead.appendChild(document.createTextNode(title));
+            let pen = document.createElement('p');
+            pen.appendChild(document.createTextNode(note));
+            outerDiv.appendChild(titlehead);
+            outerDiv.appendChild(pen);
+            // outerDiv.innerHTML += "<br/>";
+            let timelbl = document.createElement('small');
+            timelbl.appendChild(document.createTextNode(time));
+            outerDiv.appendChild(timelbl)
+            let  container = document.querySelector('#ShowData');
+            container.appendChild(outerDiv);
+            outerDiv.addEventListener('click',fun =>{
+                changePen(ide)
+            })
             // document.querySelector('#DataNote').style.background = bgColorChange() 
             /*TODO 1 apr : 
             add event listener to open modal on click of note for update and delete
@@ -121,29 +144,67 @@ const RetrieveData = () =>{
     })
 }
 
-const editNote = async  (id) =>{
-
+const changePen = async  (id) =>{
+    console.log(id)
     const doc =  await firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).get()
     $('#updatetitle').val(doc.get('title'))   
     $('#updatetask').val(doc.get('note'))   
-    $("#updateData").modal('show')
-    console.log("Head")
-    // console.log(updateData);
-    
+    $("#updateData").modal()
+    document.querySelector('#updatebtn').addEventListener('click',updatePen(id))
+    $('#deletebtn').onclick = deletePen(id)
+    // $('#deletebtn').addEventListener('click',deletePen(id))
 }
 
-const template = (title,note,time,Id) =>{
-    return '<div id="DataNote" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
-}
-
-const getStringWithNewLine = (str="") => {
-    if(str){
-        return str.split('\n').join("<br/>")
-        // return str.replace('\n', "<BR>");
-        console.log(str)
+const updatePen = (id) => {
+    console.log(id)
+    let titleData = document.querySelector('#updatetitle').value;
+    let noteData  = document.querySelector('#updatetask').value;
+    let data = {
+        'title': titleData,
+        'note' : noteData,
+        // 'time' : firebase.firestore.FieldValue.serverTimestamp()
     }
-    return str
+    firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).update(data).then(() => {
+        console.log("Document successfully updated!");
+        // $('#closeModal').click()
+    })
+    .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+    RetrievePen()
 }
+
+const deletePen = (id) =>{
+    return firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).delete()
+}
+
+// const template = (title,note,time,Id) =>{
+//     if(time != null) time = time.toDate();
+//     if(time == null) time = "Just now"
+//     // return '<div id="DataNote" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
+//     let outerDiv = document.createElement("div");
+//     outerDiv.id = id;
+//     let titlehead = document.createElement('h3');
+//     titlehead.appendChild(document.createTextNode(title));
+//     let pen = document.createElement('p');
+//     pen.appendChild(document.createTextNode(note));
+//     outerDiv.appendChild(titlehead);
+//     outerDiv.appendChild(pen);
+//     outerDiv.innerHTML += "<br/>";
+//     let timelbl = document.createElement('small');
+//     timelbl.appendChild(document.createTextNode(time));
+//     outerDiv.appendChild(timelbl)
+// }
+
+// const getStringWithNewLine = (str="") => {
+//     if(str){
+//         return str.split('\n').join("<br/>")
+//         // return str.replace('\n', "<BR>");
+//         console.log(str)
+//     }
+//     return str
+// }
 
 
 initFirebaseAuth();

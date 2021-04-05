@@ -24,9 +24,6 @@
     font-size: 2rem;
 }
 
-@media screen and (max-width :426px){
-    #name{font-size: 0;}
-}
 
 #name{
     color: black;
@@ -39,10 +36,6 @@
     border-radius: 50%;
 }
 
-@media screen and (max-width :321px){
-    button{font-size: 0;
-        background-color: none;}
-}
 
 .center{
     justify-content: center;
@@ -75,12 +68,42 @@ input{
     margin: 1.5rem;
 }
 
-#DataNote{
+#ShowData div {
     /* padding: 0.8rem; */
     overflow: auto;
     padding: 3rem;
     height: 15rem;
+    white-space: pre-line;
 }
+
+
 input[type=text]{
     font-weight: 700;
+}
+
+h2{
+    font-size: 3rem;
+}
+
+
+@media screen and (max-width :321px){
+    .profile{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+    h2{
+        font-size: 2rem;
+    }
+}
+@media screen and (max-width :426px){
+    #name{font-size: 0;}
+    h2{
+        font-size: 2rem;
+    }
+    .profile{
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+    }
 }
