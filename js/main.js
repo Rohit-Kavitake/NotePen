@@ -150,12 +150,13 @@ const changePen = async  (id) =>{
     $('#updatetitle').val(doc.get('title'))   
     $('#updatetask').val(doc.get('note'))   
     $("#updateData").modal()
-    document.querySelector('#updatebtn').addEventListener('click',updatePen(id))
-    $('#deletebtn').onclick = deletePen(id)
+    document.querySelector('#updatebtn').addEventListener('click',() => updatePen(id))
+    $('#deletebtn').onclick = ()  => deletePen(id)
     // $('#deletebtn').addEventListener('click',deletePen(id))
 }
 
 const updatePen = (id) => {
+    alert("update")
     console.log(id)
     let titleData = document.querySelector('#updatetitle').value;
     let noteData  = document.querySelector('#updatetask').value;
@@ -173,9 +174,11 @@ const updatePen = (id) => {
         console.error("Error updating document: ", error);
     });
     RetrievePen()
+    RetrievePen()
 }
 
 const deletePen = (id) =>{
+    alert("delete")
     return firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).delete()
 }
 
