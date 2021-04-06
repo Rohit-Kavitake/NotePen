@@ -85,6 +85,16 @@ h2{
     font-size: 3rem;
 }
 
+#ShowData :hover{
+    border: skyblue 2px solid;
+}
+
+#ShowData div :hover{
+    border:none;
+}
+
+
+
 
 @media screen and (max-width :321px){
     .profile{

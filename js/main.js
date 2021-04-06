@@ -105,9 +105,9 @@ const addPen = () =>{
 // }
 
 const RetrievePen = () =>{
-    document.querySelector('#ShowData').innerHTML = ""
     firebase.firestore().collection(firebase.auth().currentUser.email).orderBy("time", "desc").get()
     .then(snap => {
+        document.querySelector('#ShowData').innerHTML = ""
         snap.forEach(doc =>{
             let time =doc.get('time')
             let title =doc.get('title')
@@ -119,7 +119,7 @@ const RetrievePen = () =>{
             // return '<div id="DataNote" class="col-md-4 col-sm-4"><h3>'+ title +'</h3><p>'+ note +'</p><br><small>'+ time +'</small><label id="docId" hidden>' + Id +'</label></div>'
             let outerDiv = document.createElement("div");
             outerDiv.className = "col-md-4 col-sm-4"
-            // outerDiv.id = ide;
+            outerDiv.id = "ide";
             let titlehead = document.createElement('h3');
             titlehead.appendChild(document.createTextNode(title));
             let pen = document.createElement('p');
@@ -156,7 +156,7 @@ const changePen = async  (id) =>{
 }
 
 const updatePen = (id) => {
-    alert("update")
+    // alert("update")
     console.log(id)
     let titleData = document.querySelector('#updatetitle').value;
     let noteData  = document.querySelector('#updatetask').value;
@@ -174,12 +174,13 @@ const updatePen = (id) => {
         console.error("Error updating document: ", error);
     });
     RetrievePen()
-    RetrievePen()
+    document.querySelector('#closeModal').click()
+    // RetrievePen()
 }
 
 const deletePen = (id) =>{
-    alert("delete")
-    return firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).delete()
+    // alert("delete")
+    firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).delete()
 }
 
 // const template = (title,note,time,Id) =>{
