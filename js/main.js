@@ -107,7 +107,10 @@ const addPen = () =>{
 const RetrievePen = () =>{
     firebase.firestore().collection(firebase.auth().currentUser.email).orderBy("time", "desc").get()
     .then(snap => {
-        document.querySelector('#ShowData').innerHTML = ""
+        document.querySelector('#ShowData').innerHTML = "";
+        if(snap.empty)
+            // console.log('here')
+        document.querySelector('#ShowData').innerHTML = "<center><h1>No Pens!! Create One Now</h1></center>";
         snap.forEach(doc =>{
             let time =doc.get('time')
             let title =doc.get('title')
@@ -151,7 +154,8 @@ const changePen = async  (id) =>{
     $('#updatetask').val(doc.get('note'))   
     $("#updateData").modal()
     document.querySelector('#updatebtn').addEventListener('click',() => updatePen(id))
-    $('#deletebtn').onclick = ()  => deletePen(id)
+    document.querySelector('#deletebtn').addEventListener('click',() => deletePen(id))
+    // $('#deletebtn').onclick = ()  => deletePen(id)
     // $('#deletebtn').addEventListener('click',deletePen(id))
 }
 
@@ -181,6 +185,8 @@ const updatePen = (id) => {
 const deletePen = (id) =>{
     // alert("delete")
     firebase.firestore().collection(firebase.auth().currentUser.email).doc(id).delete()
+    .then(() => {console.log("Deleted")})
+    RetrievePen()
 }
 
 // const template = (title,note,time,Id) =>{
