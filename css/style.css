@@ -66,6 +66,7 @@ input{
 }
 #ShowData{
     margin: 1.5rem;
+    min-height: 100vh;
 }
 
 #ShowData div {
